@@ -59,7 +59,7 @@
 				<span id="error" style="color: red"></span>
 			 </div>
 			</div>
-			<div id="hide3" style="display:none">
+			<div id="hide3" style="display:none;">
 				<div class="heading">Submitted Information</div>
 				<div id="insert"></div>
 				<button type="submit" id="home" onclick="back()" class="btn-primary">Home</button>
@@ -95,13 +95,13 @@
 				att.value = "form-group";
 				div.setAttributeNode(att);
 				var div1=document.createElement("div");
-				 div1.className="col-sm-6";
+				 div1.className="col-sm-12 col-md-6";
 				var label = document.createElement("label");
 				label.innerHTML =x;
 				div1.appendChild(label)
 				div.appendChild(div1);
 				var type= typeof json[x];
-				if((type === "string"|| type==="number")&&(json[x]!==dateformat)&&(!x.includes("Upload"))&&(!x.includes("CGPA"))&&(!x.includes("Gender")))
+				if((type === "string"|| type==="number")&&(json[x]!==dateformat)&&(!x.includes("Upload"))&&(!x.includes("CGPA"))&&(!x.includes("Gender")) &&(!x.includes("upload"))&&(!x.includes("gender"))&&(!x.includes("cgpa")))
 					{
 					var input = document.createElement("input");
 					input.type="text";
@@ -133,7 +133,7 @@
 						div1.appendChild(date);
 						div.appendChild(div1);
 					}
-				else if(x.includes("Upload"))
+				else if(x.includes("Upload")||x.includes("upload"))
 				{
 					var file=document.createElement("input");
 					file.type="file";
@@ -142,7 +142,7 @@
 					div1.appendChild(file);
 					div.appendChild(div1);
 				}
-				else if(x.includes("CGPA"))
+				else if(x.includes("CGPA")||x.includes("cgpa"))
 					{
 					var cgpa=document.createElement("input");
 					cgpa.type="range";
@@ -151,7 +151,7 @@
 					div1.appendChild(cgpa);
 					div.appendChild(div1);
 					}
-				else if(x.includes("Gender"))
+				else if(x.includes("Gender")||x.includes("gender"))
 				{
 					
 					var gender=document.createElement("input");
@@ -180,9 +180,11 @@
 		document.getElementById("hide").style.display="none";
 		answer1.style.display="block";
 	}
-}
+	}
 	function save()
 	{
+		
+		console.log(json2[0]);
 		for(let x in json2)
 		{
 			var div = document.createElement("div");
@@ -203,6 +205,7 @@
 		}
 		document.getElementById("output").style.display="none";
 		document.getElementById("hide3").style.display="block";
+
 	}
 	function back()
 	{
