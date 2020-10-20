@@ -80,7 +80,6 @@
 		arr.push(file);
 		var countKey = Object.keys(json).length;
 		var dateformat = "yyyy/mm/dd";
-		//console.log(json);
 		for(let x in json)
 			{
 				var div = document.createElement("div");
@@ -95,14 +94,14 @@
 					{
 					var input = document.createElement("input");
 					input.type="text";
-					input.name=x;
+					input.id=x;
 					input.className="form-control";
 					div.appendChild(input);
 					}
 				else if(type=== "object")
 					{
 						var select= document.createElement("select");
-						select.name=x;
+						select.id=x;
 						select.style.width="100%";
 						for(let y in json[x])
 							{
@@ -117,7 +116,7 @@
 						var date=document.createElement("input");
 						date.type="date";
 						date.className="form-control";
-						date.name=x;
+						date.id=x;
 						div.appendChild(date);
 					}
 				else if(x.includes("Upload"))
@@ -125,7 +124,7 @@
 					var file=document.createElement("input");
 					file.type="file";
 					file.className="form-control";
-					file.name=x;
+					file.id=x;
 					div.appendChild(file);
 				}
 				else if(x.includes("CGPA"))
@@ -133,7 +132,7 @@
 					var cgpa=document.createElement("input");
 					cgpa.type="range";
 					cgpa.className="form-control";
-					cgpa.name=x;
+					cgpa.id=x;
 					div.appendChild(cgpa);
 					}
 				answer.appendChild(div);
@@ -160,7 +159,6 @@
 		
 		for(let x in json2)
 		{
-			console.log(x+" "+json2[x]);
 			var div = document.createElement("div");
 				var att = document.createAttribute("class");
 				att.value = "form-group";
@@ -173,7 +171,7 @@
 					file.type="text";
 					file.className="form-control";
 					file.name=x;
-					file.value=json2[x];
+					file.value=document.getElementById(x).value;
 					div.appendChild(file);
 
 			
