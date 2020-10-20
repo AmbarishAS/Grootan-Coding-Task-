@@ -180,25 +180,9 @@
 		document.getElementById("hide").style.display="none";
 		answer1.style.display="block";
 	}
-	/*catch(err)
-	{
-		console.log(err);
-		document.getElementById("error").innerHTML="Only JSON input is accepted";
-	}*/
-	}
+}
 	function save()
 	{
-		
-		/*var fso = new ActiveXObject("Scripting.FileSystemObject");
-		var a = fso.CreateTextFile("D:\grootan project\test.txt", true);
-		a.WriteLine("This is a test.");
-		a.Close();*/
-		/*var link=document.createElement('a');
-		var blob=new Blob([file],{type:'text/plain'});
-		link.href=window.URL.createObjectURL(blob);
-		link.click();*/
-		//var f = new File([file, "filename.txt", {type: "text/plain", lastModified: date})
-		console.log(json2[0]);
 		for(let x in json2)
 		{
 			var div = document.createElement("div");
