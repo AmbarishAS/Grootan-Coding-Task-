@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>JSON Input</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+}
+.heading {
+	font-size: 17px;
+	font-weight: bold;
+	margin-bottom: 30px;
+	color: #1e1e1e;
+	padding-bottom: 10px;
+	border-bottom: solid 3px brown;
+	text-shadow: 0 0 black;
+}
+
+</style>	
+</head>
+<body style="background-image: url('eberhard-grossgasteiger-CytHrRFp2wU-unsplash.jpg');">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/index" style="color:black">Grootan Test-Coding Task</a>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-body">
+			<div id="output"  style="display:none">
+			<div class="heading">Sample Output-Grootan Test</div>
+				<form id="form">
+	
+				</form>
+				<button type="submit" onclick="save()">Submit</button>
+			</div>
+			<div id="hide">
+			<div class="heading">JSON Input</div>
+			 <div class="col-sm-12">
+				<div class="form-group">
+					<label>Enter Your JSON Input(JSON Format):</label><br> 
+					<textarea id="input" rows="4" cols="50"></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary" value="submit" onclick="generate()">Submit</button>
+			 </div>
+			</div>
+			<div id="hide3" style="display:none">
+				<div class="heading">Submitted Information</div>
+				<div id="insert"></div>
+				<button type="submit" id="home" onclick="back()">Home</button>
+			</div>
+		</div>
+		</div>
+	</div>
+	</div>
+	<script>
+		var json2;
+		var arr=["1"];
+	function generate()
+	{
+		var answer=document.getElementById("form");
+		var answer1=document.getElementById("output");
+		var input=document.getElementById("input").value;
+		var json=JSON.parse(input);
+		json2=json;
+		var file = JSON.stringify(json);
+		arr.push(file);
+		var countKey = Object.keys(json).length;
+		var dateformat = "yyyy/mm/dd";
+		//console.log(json);
+		for(let x in json)
+			{
+				var div = document.createElement("div");
+				var att = document.createAttribute("class");
+				att.value = "form-group";
+				div.setAttributeNode(att);
+				var label = document.createElement("label");
+				label.innerHTML =x;
+				div.appendChild(label);
+				var type= typeof json[x];
+				if((type === "string"|| type==="number")&&(json[x]!==dateformat)&&(!x.includes("Upload"))&&(!x.includes("CGPA")))
+					{
+					var input = document.createElement("input");
+					input.type="text";
+					input.name=x;
+					input.className="form-control";
+					div.appendChild(input);
+					}
+				else if(type=== "object")
+					{
+						var select= document.createElement("select");
+						select.name=x;
+						select.style.width="100%";
+						for(let y in json[x])
+							{
+								var option =document.createElement("option");
+								option.innerHTML=json[x][y];
+								select.appendChild(option);
+							}
+						div.appendChild(select);
+					}
+				else if(json[x]===dateformat)
+					{
+						var date=document.createElement("input");
+						date.type="date";
+						date.className="form-control";
+						date.name=x;
+						div.appendChild(date);
+					}
+				else if(x.includes("Upload"))
+				{
+					var file=document.createElement("input");
+					file.type="file";
+					file.className="form-control";
+					file.name=x;
+					div.appendChild(file);
+				}
+				else if(x.includes("CGPA"))
+					{
+					var cgpa=document.createElement("input");
+					cgpa.type="range";
+					cgpa.className="form-control";
+					cgpa.name=x;
+					div.appendChild(cgpa);
+					}
+				answer.appendChild(div);
+			}
+		/*var submit=document.createElement("button");
+		submit.type="submit";
+		submit.innerHTML="Submit";
+		div.appendChild(submit);*/
+		document.getElementById("hide").style.display="none";
+		answer1.style.display="block";
+	}
+	function save()
+	{
+		
+		/*var fso = new ActiveXObject("Scripting.FileSystemObject");
+		var a = fso.CreateTextFile("D:\grootan project\test.txt", true);
+		a.WriteLine("This is a test.");
+		a.Close();*/
+		/*var link=document.createElement('a');
+		var blob=new Blob([file],{type:'text/plain'});
+		link.href=window.URL.createObjectURL(blob);
+		link.click();*/
+		//var f = new File([file, "filename.txt", {type: "text/plain", lastModified: date})
+		
+		for(let x in json2)
+		{
+			console.log(x+" "+json2[x]);
+			var div = document.createElement("div");
+				var att = document.createAttribute("class");
+				att.value = "form-group";
+				div.setAttributeNode(att);
+			var label = document.createElement("label");
+				label.innerHTML =x;
+				div.appendChild(label);
+				document.getElementById("insert").appendChild(div);
+				var file=document.createElement("input");
+					file.type="text";
+					file.className="form-control";
+					file.name=x;
+					file.value=json2[x];
+					div.appendChild(file);
+
+			
+
+		}
+		document.getElementById("output").style.display="none";
+		document.getElementById("hide3").style.display="block";
+	}
+	function back()
+	{
+		document.getElementById("hide3").style.display="none";
+		document.getElementById("hide").style.display="block";
+	}
+	</script>	
+</body>
+</html>
