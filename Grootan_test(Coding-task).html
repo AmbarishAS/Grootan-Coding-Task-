@@ -51,7 +51,7 @@
 			<div class="heading">JSON Input</div>
 			 <div class="col-sm-12">
 				<div class="form-group">
-					<label>Enter Your JSON Input(JSON Format):</label><br> 
+					<label style="color: red">Enter Your JSON Input(*Only in JSON Format):</label><br> 
 					<textarea id="input" rows="4" cols="50"></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary" value="submit" onclick="generate()">Submit</button>
@@ -60,7 +60,7 @@
 			<div id="hide3" style="display:none">
 				<div class="heading">Submitted Information</div>
 				<div id="insert"></div>
-				<button type="submit" id="home" onclick="back()">Home</button>
+				<button type="submit" id="home" onclick="back()" class="btn-primary">Home</button>
 			</div>
 		</div>
 		</div>
@@ -90,7 +90,7 @@
 				label.innerHTML =x;
 				div.appendChild(label);
 				var type= typeof json[x];
-				if((type === "string"|| type==="number")&&(json[x]!==dateformat)&&(!x.includes("Upload"))&&(!x.includes("CGPA")))
+				if((type === "string"|| type==="number")&&(json[x]!==dateformat)&&(!x.includes("Upload"))&&(!x.includes("CGPA"))&&(!x.includes("Gender")))
 					{
 					var input = document.createElement("input");
 					input.type="text";
@@ -135,6 +135,25 @@
 					cgpa.id=x;
 					div.appendChild(cgpa);
 					}
+				else if(x.includes("Gender"))
+				{
+					var gender=document.createElement("input");
+					gender.type="radio";
+					gender.id=x;
+					gender.value="Male";
+					var ml=document.createElement("label");
+					ml.innerHTML="Male";
+					div.appendChild(gender);
+					div.appendChild(ml);
+					var gender1=document.createElement("input");
+					gender1.type="radio";
+					gender1.id=2;
+					gender1.value="Female";
+					var gl=document.createElement("label");
+					gl.innerHTML="Female";
+					div.appendChild(gender1);
+					div.appendChild(gl);
+				}	
 				answer.appendChild(div);
 			}
 		/*var submit=document.createElement("button");
@@ -156,7 +175,6 @@
 		link.href=window.URL.createObjectURL(blob);
 		link.click();*/
 		//var f = new File([file, "filename.txt", {type: "text/plain", lastModified: date})
-		
 		for(let x in json2)
 		{
 			var div = document.createElement("div");
@@ -172,9 +190,7 @@
 					file.className="form-control";
 					file.name=x;
 					file.value=document.getElementById(x).value;
-					div.appendChild(file);
-
-			
+					div.appendChild(file);	
 
 		}
 		document.getElementById("output").style.display="none";
