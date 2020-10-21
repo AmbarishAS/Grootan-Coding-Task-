@@ -46,7 +46,7 @@
 				<div class="row" id="form">
 				</div>
 				</form>
-				<button type="submit" onclick="save()" class="btn btn-primary">Submit</button>
+				<button type="submit" onclick="save()">Submit</button>
 			</div>
 			<div id="hide">
 			<div class="heading">JSON Input</div>
@@ -72,20 +72,15 @@
 	<script>
 		var json2;
 		var arr=["1"];
+		var json;
 	function generate()
 	{
 		var answer=document.getElementById("form");
 		var answer1=document.getElementById("output");
 		var input=document.getElementById("input").value;
-		if(input.charAt(0) !== "{")
+		if(valid(input))
 		{
-			document.getElementById('error').innerHTML="Only JSON format is Supported";
-		}
-		else
-		{
-		var json=JSON.parse(input);
-		json2=json;
-		var file = JSON.stringify(json);
+		file = JSON.stringify(json);
 		arr.push(file);
 		var countKey = Object.keys(json).length;
 		var dateformat = "yyyy/mm/dd";
@@ -181,6 +176,10 @@
 		document.getElementById("hide").style.display="none";
 		answer1.style.display="block";
 	}
+	else
+	{
+		document.getElementById('error').innerHTML="Only JSON format is Supported";
+	}
 	}
 	function save()
 	{
@@ -216,6 +215,20 @@
 	function download()
 	{
 		window.print();
+	}
+	function valid(input)
+	{
+		try
+		{
+			JSON.parse(input);		
+		}
+		catch(e)
+		{
+			return false;
+		}
+		json=JSON.parse(input);
+		json2=json;
+		return true;
 	}
 	</script>	
 </body>
