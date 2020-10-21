@@ -62,7 +62,8 @@
 			<div id="hide3" style="display:none;">
 				<div class="heading">Submitted Information</div>
 				<div id="insert" style="background-color: yellow"></div>
-				<button type="submit" id="home" onclick="back()" class="btn-primary">Home</button>
+				<button type="submit" id="home" onclick="back()" class="btn-danger">Home</button>
+				<button type="submit" onclick="download()" class="btn-success">Downlaod</button>
 			</div>
 		</div>
 		</div>
@@ -211,6 +212,10 @@
 	{
 		document.getElementById("hide3").style.display="none";
 		document.getElementById("hide").style.display="block";
+	}
+	function download()
+	{
+		window.print();
 	}
 	</script>	
 </body>
